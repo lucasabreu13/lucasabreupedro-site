@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucas Abreu Pedro — Desenvolvedor Full-Stack</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0A0A0A;--surface:#111111;--surface2:#161616;--border:#1e1e1e;--border2:#2a2a2a;--text:#F0EDE8;--muted:#666660;--muted2:#3a3a38;--accent:#3B82F6;--accent-glow:rgba(59,130,246,0.12);--accent-border:rgba(59,130,246,0.25)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--text);text-decoration:none;letter-spacing:.04em}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.8rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{font-family:'Syne',sans-serif;font-weight:600;background:var(--accent);color:#fff!important;padding:.5rem 1.25rem;border-radius:100px;transition:opacity .2s!important}
+.nav-cta:hover{opacity:.85!important}
+.hero{min-height:100vh;padding:9rem 3rem 5rem;max-width:1200px;margin:0 auto;display:flex;flex-direction:column;justify-content:center}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3.5rem;opacity:0;transform:translateY(20px);animation:fadeUp .7s ease forwards .1s}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-border);padding:.4rem 1rem;border-radius:100px;background:var(--accent-glow)}
+.hero-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+.hero-loc{font-size:.75rem;color:var(--muted);font-weight:300}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(3.2rem,6.5vw,6rem);font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--text);margin-bottom:1rem;opacity:0;transform:translateY(20px);animation:fadeUp .7s ease forwards .25s}
+.hero-title .accent{color:var(--accent)}
+.hero-title .outline{-webkit-text-stroke:1px #2a2a2a;color:transparent}
+.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;opacity:0;transform:translateY(20px);animation:fadeUp .7s ease forwards .4s}
+.hero-desc{font-size:.95rem;font-weight:300;color:var(--muted);line-height:1.8;max-width:360px}
+.hero-actions{display:flex;gap:.75rem;align-items:center;flex-shrink:0}
+.btn-primary{background:var(--accent);color:#fff;padding:.8rem 1.75rem;border-radius:100px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Syne',sans-serif;transition:opacity .2s,transform .2s;display:inline-block}
+.btn-primary:hover{opacity:.85;transform:translateY(-2px)}
+.btn-ghost{color:var(--muted);font-size:.85rem;text-decoration:none;border:1px solid var(--border2);padding:.8rem 1.5rem;border-radius:100px;transition:color .2s,border-color .2s}
+.btn-ghost:hover{color:var(--text);border-color:#444}
+.metrics-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2rem 3rem;display:grid;grid-template-columns:repeat(4,1fr);max-width:1200px;margin:0 auto;opacity:0;animation:fadeUp .7s ease forwards .6s}
+.metric{padding:0 2rem;border-right:1px solid var(--border)}
+.metric:first-child{padding-left:0}
+.metric:last-child{border-right:none}
+.metric-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text);line-height:1;margin-bottom:.3rem}
+.metric-num span{color:var(--accent)}
+.metric-label{font-size:.75rem;color:var(--muted);font-weight:300}
+section{padding:6rem 3rem;max-width:1200px;margin:0 auto}
+.section-eyebrow{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:.85rem;display:flex;align-items:center;gap:.75rem}
+.section-eyebrow::before{content:'';width:20px;height:1px;background:var(--muted2)}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,2.9rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;color:var(--text);margin-bottom:3rem}
+.section-title em{font-style:italic;color:var(--accent)}
+.services-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem}
+.services-count{font-size:.75rem;color:var(--muted)}
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.service-card{background:var(--surface);padding:2.25rem;transition:background .2s;display:flex;flex-direction:column;gap:.85rem}
+.service-card:hover{background:var(--surface2)}
+.service-top{display:flex;justify-content:space-between;align-items:flex-start}
+.service-num{font-family:'Syne',sans-serif;font-size:.68rem;color:var(--muted2);font-weight:700;letter-spacing:.1em}
+.service-arrow{width:30px;height:30px;border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.75rem;transition:border-color .2s,color .2s}
+.service-card:hover .service-arrow{border-color:var(--accent);color:var(--accent)}
+.service-name{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:var(--text)}
+.service-desc{font-size:.82rem;color:var(--muted);line-height:1.7;font-weight:300;flex:1}
+.service-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.tag{font-size:.67rem;font-weight:500;color:var(--muted);border:1px solid var(--border2);padding:.22rem .65rem;border-radius:100px}
+.about-wrap{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:3.5rem;display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:center}
+.about-photo{aspect-ratio:3/4;background:var(--bg);border-radius:14px;overflow:hidden;border:1px solid var(--border);position:relative}
+.about-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.about-photo-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(10,10,10,.92) 0%,transparent 100%);padding:1.75rem 1.5rem}
+.about-photo-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.15rem}
+.about-photo-role{font-size:.73rem;color:var(--muted)}
+.about-content .section-title{margin-bottom:1.25rem}
+.about-bio{font-size:.9rem;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:2.25rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;border-top:1px solid var(--border);padding-top:1.75rem}
+.about-stat-num{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);margin-bottom:.2rem}
+.about-stat-label{font-size:.72rem;color:var(--muted);font-weight:300;line-height:1.4}
+.exp-list{display:flex;flex-direction:column}
+.exp-item{display:flex;gap:2rem;padding:1.75rem 0;border-bottom:1px solid var(--border)}
+.exp-item:first-child{border-top:1px solid var(--border)}
+.exp-period{font-size:.72rem;color:var(--muted2);min-width:120px;flex-shrink:0;font-family:'Syne',sans-serif;letter-spacing:.04em;padding-top:.2rem}
+.exp-role{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.2rem}
+.exp-company{font-size:.78rem;color:var(--accent);margin-bottom:.5rem}
+.exp-desc{font-size:.82rem;color:var(--muted);line-height:1.65;font-weight:300}
+.diff-grid{display:flex;flex-direction:column}
+.diff-item{display:flex;gap:2rem;align-items:flex-start;padding:1.75rem 0;border-bottom:1px solid var(--border)}
+.diff-item:first-child{border-top:1px solid var(--border)}
+.diff-num{font-family:'Syne',sans-serif;font-size:.72rem;color:var(--muted2);font-weight:700;min-width:2rem;padding-top:.15rem}
+.diff-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.35rem}
+.diff-desc{font-size:.82rem;color:var(--muted);font-weight:300;line-height:1.65}
+.diff-badge{margin-left:auto;flex-shrink:0;font-size:.65rem;font-weight:600;color:var(--accent);background:var(--accent-glow);border:1px solid var(--accent-border);padding:.3rem .75rem;border-radius:100px;align-self:center;font-family:'Syne',sans-serif}
+.stack-section{padding:5rem 3rem;border-top:1px solid var(--border);max-width:1200px;margin:0 auto}
+.stack-list{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.25rem}
+.stack-item{font-size:.8rem;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:.5rem 1.1rem;border-radius:100px;transition:border-color .2s,color .2s,background .2s;cursor:default}
+.stack-item:hover{border-color:var(--accent-border);color:var(--accent);background:var(--accent-glow)}
+.cta-section{padding:0 3rem 6rem;max-width:1200px;margin:0 auto}
+.cta-box{background:var(--accent);border-radius:20px;padding:4.5rem 4rem;display:flex;justify-content:space-between;align-items:center;gap:3rem}
+.cta-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.7rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;color:#fff}
+.cta-sub{font-size:.9rem;font-weight:300;color:rgba(255,255,255,.7);margin-top:.65rem;max-width:380px;line-height:1.65}
+.cta-buttons{display:flex;gap:.75rem;flex-shrink:0;align-items:center}
+.btn-dark{background:#0A0A0A;color:#fff;padding:.85rem 1.75rem;border-radius:100px;font-size:.85rem;font-weight:600;text-decoration:none;font-family:'Syne',sans-serif;transition:opacity .2s}
+.btn-dark:hover{opacity:.85}
+.btn-dark-ghost{color:#fff;font-size:.85rem;text-decoration:none;border:1px solid rgba(255,255,255,.35);padding:.85rem 1.5rem;border-radius:100px;transition:border-color .2s}
+.btn-dark-ghost:hover{border-color:rgba(255,255,255,.7)}
+footer{border-top:1px solid var(--border);padding:2.25rem 3rem;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
+footer p{font-size:.75rem;color:var(--muted)}
+footer a{font-size:.75rem;color:var(--muted);text-decoration:none;transition:color .2s}
+footer a:hover{color:var(--text)}
+.footer-links{display:flex;gap:2rem}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@media(max-width:768px){nav{padding:1rem 1.5rem}.nav-links{display:none}.hero{padding:7rem 1.5rem 4rem}.hero-title{font-size:2.8rem}.hero-bottom{flex-direction:column;align-items:flex-start;gap:1.5rem}.metrics-bar{grid-template-columns:repeat(2,1fr);padding:1.75rem 1.5rem}.metric{border-right:none;padding:0}section{padding:4rem 1.5rem}.services-grid{grid-template-columns:1fr}.about-wrap{grid-template-columns:1fr;padding:2rem;gap:2rem}.exp-item{flex-direction:column;gap:.5rem}.exp-period{min-width:auto}.cta-box{flex-direction:column;padding:2.5rem 2rem}.cta-buttons{flex-direction:column;width:100%}.btn-dark,.btn-dark-ghost{text-align:center;width:100%}footer{flex-direction:column;gap:1rem;text-align:center}.stack-section,.cta-section{padding-left:1.5rem;padding-right:1.5rem}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Lucas<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#experiencia">Experiência</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#contato" class="nav-cta">Iniciar projeto</a></li>
+  </ul>
+</nav>
+
+<div style="max-width:1200px;margin:0 auto">
+<section class="hero">
+  <div class="hero-top">
+    <div class="hero-badge">Disponível para projetos</div>
+    <span class="hero-loc">São Paulo, BR — 2025</span>
+  </div>
+  <h1 class="hero-title">
+    Desenvolvimento<br>
+    <span class="outline">web que</span><br>
+    <span class="accent">converte.</span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">Desenvolvedor full-stack com 7+ anos em TI. Crio sites, landing pages, plataformas SaaS e sistemas — do design ao deploy. Entrego resultado, não só código.</p>
+    <div class="hero-actions">
+      <a href="#contato" class="btn-primary">Iniciar projeto →</a>
+      <a href="#servicos" class="btn-ghost">Ver serviços</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="metrics-bar">
+  <div class="metric"><div class="metric-num">7<span>+</span></div><div class="metric-label">Anos em TI e desenvolvimento</div></div>
+  <div class="metric"><div class="metric-num">100<span>%</span></div><div class="metric-label">Projetos entregues</div></div>
+  <div class="metric"><div class="metric-num">4<span>+</span></div><div class="metric-label">Empresas atendidas</div></div>
+  <div class="metric"><div class="metric-num">24<span>h</span></div><div class="metric-label">Tempo de resposta</div></div>
+</div>
+
+<section id="servicos">
+  <div class="services-header">
+    <div>
+      <p class="section-eyebrow">O que eu faço</p>
+      <h2 class="section-title">Serviços <em>completos</em><br>do início ao fim.</h2>
+    </div>
+    <span class="services-count">06 especialidades</span>
+  </div>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-top"><span class="service-num">01</span><span class="service-arrow">↗</span></div><h3 class="service-name">Site Institucional</h3><p class="service-desc">Sites modernos, rápidos e com foco em conversão. Design exclusivo, responsivo e otimizado para SEO.</p><div class="service-tags"><span class="tag">Next.js</span><span class="tag">React</span><span class="tag">SEO</span></div></div>
+    <div class="service-card"><div class="service-top"><span class="service-num">02</span><span class="service-arrow">↗</span></div><h3 class="service-name">Landing Page</h3><p class="service-desc">Páginas de alta conversão com copy estratégico. Estrutura pensada para transformar visitante em cliente.</p><div class="service-tags"><span class="tag">Copy</span><span class="tag">Design</span><span class="tag">Conversão</span></div></div>
+    <div class="service-card"><div class="service-top"><span class="service-num">03</span><span class="service-arrow">↗</span></div><h3 class="service-name">Plataforma SaaS</h3><p class="service-desc">Sistemas web completos com autenticação, multi-tenant, painéis por perfil e integrações via API.</p><div class="service-tags"><span class="tag">NestJS</span><span class="tag">PostgreSQL</span><span class="tag">JWT</span></div></div>
+    <div class="service-card"><div class="service-top"><span class="service-num">04</span><span class="service-arrow">↗</span></div><h3 class="service-name">E-commerce</h3><p class="service-desc">Lojas virtuais com checkout otimizado, gestão de produtos e integrações com meios de pagamento.</p><div class="service-tags"><span class="tag">Shopify</span><span class="tag">Pagamentos</span><span class="tag">Gestão</span></div></div>
+    <div class="service-card"><div class="service-top"><span class="service-num">05</span><span class="service-arrow">↗</span></div><h3 class="service-name">PDV & Sistemas Internos</h3><p class="service-desc">Ponto de venda, controle de estoque, gestão financeira e automações para o dia a dia do negócio.</p><div class="service-tags"><span class="tag">Automação</span><span class="tag">CRUD</span><span class="tag">Relatórios</span></div></div>
+    <div class="service-card"><div class="service-top"><span class="service-num">06</span><span class="service-arrow">↗</span></div><h3 class="service-name">Copy de Landing Page</h3><p class="service-desc">Texto persuasivo com estrutura de copywriting para comunicar valor e aumentar conversão.</p><div class="service-tags"><span class="tag">Copywriting</span><span class="tag">Persuasão</span><span class="tag">Vendas</span></div></div>
+  </div>
+</section>
+
+<section id="sobre" style="padding-top:2rem">
+  <p class="section-eyebrow">Sobre mim</p>
+  <div class="about-wrap">
+    <div class="about-photo">
+      <img src="data:image/jpeg;base64,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" alt="Lucas Abreu Pedro" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" />
+      <div class="about-photo-overlay">
+        <p class="about-photo-name">Lucas Abreu Pedro</p>
+        <p class="about-photo-role">Desenvolvedor Full-Stack · São Paulo, BR</p>
+      </div>
+    </div>
+    <div class="about-content">
+      <h2 class="section-title">Profissional versátil,<br><em>resultado garantido.</em></h2>
+      <p class="about-bio">Desenvolvedor full-stack e especialista em TI com mais de 7 anos de experiência em empresas como ACIUM Brasil, Clube Alto dos Pinheiros e Lemanti. Combinando sólida base técnica em infraestrutura com desenvolvimento moderno de sistemas, entrego soluções completas — do planejamento ao deploy.<br><br>Formado em Sistemas da Informação pela São Judas Tadeu e em Infraestrutura e Redes pela Uninove. Hoje atuo de forma independente, focado em projetos web de alto impacto.</p>
+      <div class="about-stats">
+        <div><div class="about-stat-num">7+</div><div class="about-stat-label">Anos de experiência em TI</div></div>
+        <div><div class="about-stat-num">2</div><div class="about-stat-label">Graduações concluídas</div></div>
+        <div><div class="about-stat-num">100%</div><div class="about-stat-label">Taxa de entrega</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experiencia" style="padding-top:2rem">
+  <p class="section-eyebrow">Trajetória</p>
+  <h2 class="section-title">Experiência <em>profissional.</em></h2>
+  <div class="exp-list">
+    <div class="exp-item"><span class="exp-period">2025 — Atual</span><div><p class="exp-role">Desenvolvedor Full-Stack Freelancer</p><p class="exp-company">Autônomo · São Paulo, SP</p><p class="exp-desc">Desenvolvimento de sites, sistemas e plataformas SaaS personalizadas. Suporte técnico remoto e local. Consultoria em e-commerce (Shopify) e processos de TI.</p></div></div>
+    <div class="exp-item"><span class="exp-period">2023 — 2025</span><div><p class="exp-role">Analista de T.I Pleno</p><p class="exp-company">ACIUM Brasil · São Paulo, SP</p><p class="exp-desc">Suporte técnico, administração de ERP, otimização de processos internos (financeiros, fiscais, vendas e logística), manutenção de servidores e gestão de e-commerce Shopify.</p></div></div>
+    <div class="exp-item"><span class="exp-period">2020 — 2023</span><div><p class="exp-role">Analista de Infraestrutura de TI</p><p class="exp-company">Clube Alto dos Pinheiros · São Paulo, SP</p><p class="exp-desc">Suporte e manutenção de servidores e data center. Gerenciamento de usuários e controle de acesso. Implantação de servidores e gestão de rede Wi-Fi corporativa com tecnologia Cisco.</p></div></div>
+    <div class="exp-item"><span class="exp-period">2018 — 2019</span><div><p class="exp-role">Desenvolvedor</p><p class="exp-company">Lemanti Sistemas · São Paulo, SP</p><p class="exp-desc">Manutenção e suporte em sistemas de e-commerce. Integração e desenvolvimento com Web API. Gestão e customização da plataforma Shopify.</p></div></div>
+  </div>
+</section>
+
+<section style="padding-top:2rem">
+  <p class="section-eyebrow">Por que me contratar</p>
+  <h2 class="section-title">O que me <em>diferencia.</em></h2>
+  <div class="diff-grid">
+    <div class="diff-item"><span class="diff-num">01</span><div><p class="diff-title">Visão técnica e de negócio</p><p class="diff-desc">Não só código — entendo o seu negócio, identifico problemas reais e proponho soluções que fazem sentido estratégico.</p></div><span class="diff-badge">Estratégia</span></div>
+    <div class="diff-item"><span class="diff-num">02</span><div><p class="diff-title">Comunicação direta e transparente</p><p class="diff-desc">Updates constantes em cada etapa do projeto. Sem sumiço, sem surpresa no final.</p></div><span class="diff-badge">Confiança</span></div>
+    <div class="diff-item"><span class="diff-num">03</span><div><p class="diff-title">Entrega ponta a ponta</p><p class="diff-desc">Do wireframe até o deploy em produção. Um único responsável, sem ruído entre equipes.</p></div><span class="diff-badge">Eficiência</span></div>
+    <div class="diff-item"><span class="diff-num">04</span><div><p class="diff-title">Prazo que é prazo</p><p class="diff-desc">Cumpro o que acordo. Se surgir imprevisto, você é o primeiro a saber — nunca o último.</p></div><span class="diff-badge">Pontualidade</span></div>
+  </div>
+</section>
+
+<div class="stack-section" id="stack">
+  <p class="section-eyebrow">Tecnologias</p>
+  <h2 class="section-title" style="font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,2.9rem);font-weight:800;letter-spacing:-.02em;color:var(--text);margin-bottom:0">Stack que domino</h2>
+  <div class="stack-list">
+    <span class="stack-item">Next.js</span><span class="stack-item">React</span><span class="stack-item">TypeScript</span><span class="stack-item">NestJS</span><span class="stack-item">Node.js</span><span class="stack-item">PostgreSQL</span><span class="stack-item">TypeORM</span><span class="stack-item">JWT Auth</span><span class="stack-item">REST API</span><span class="stack-item">Vercel</span><span class="stack-item">Render</span><span class="stack-item">AWS S3</span><span class="stack-item">Shopify</span><span class="stack-item">C# / .NET</span><span class="stack-item">PHP</span><span class="stack-item">Python</span><span class="stack-item">JavaScript</span><span class="stack-item">HTML / CSS</span><span class="stack-item">SQL Server</span><span class="stack-item">Git / GitHub</span><span class="stack-item">Cisco</span>
+  </div>
+</div>
+
+<div class="cta-section" id="contato">
+  <div class="cta-box">
+    <div>
+      <h2 class="cta-title">Tem um projeto<br>em mente?</h2>
+      <p class="cta-sub">Site, sistema, plataforma ou landing page — estou disponível e pronto para começar.</p>
+    </div>
+    <div class="cta-buttons">
+      <a href="https://wa.me/5511984245882" class="btn-dark">WhatsApp →</a>
+      <a href="https://www.linkedin.com/in/lucas-abreu-pedro/" class="btn-dark-ghost">LinkedIn</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Lucas Abreu Pedro — Todos os direitos reservados</p>
+  <div class="footer-links">
+    <a href="mailto:lucasabreu312@gmail.com">lucasabreu312@gmail.com</a>
+    <a href="https://www.linkedin.com/in/lucas-abreu-pedro/">LinkedIn</a>
+  </div>
+</footer>
+</body>
+</html>
